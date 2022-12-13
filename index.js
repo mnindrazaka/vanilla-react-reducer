@@ -76,8 +76,8 @@ const React = (function () {
         ? !depArray.every((el, i) => el === deps[i])
         : true;
       if (hasNoDeps || hasChangedDeps) {
-        callback();
         hooks[currentIndex] = depArray;
+        callback();
       }
       currentIndex++;
     },
@@ -249,6 +249,10 @@ function HomePage(props) {
   React.useEffect(() => {
     localStorage.setItem("inputValue", state.inputValue);
   }, [state.inputValue]);
+
+  React.useEffect(() => {
+    send({ type: "FETCH" });
+  }, []);
 
   React.useEffect(() => {
     if (state.loading) {
